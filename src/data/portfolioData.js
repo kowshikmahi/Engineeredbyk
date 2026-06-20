@@ -27,8 +27,8 @@ export const personalInfo = {
   github: "https://github.com/kowshikmahi",
   linkedin: "https://www.linkedin.com/in/kowshik-mahi/",
   instagram: "https://www.instagram.com/kowshik_mahi",
-  resume: "/resume.pdf",
-  image: "/profile.jpeg",
+  image: `${import.meta.env.BASE_URL}profile.jpeg`,
+  resume: `${import.meta.env.BASE_URL}resume.pdf`,
 };
 
 export const stats = [
