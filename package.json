@@ -2,7 +2,7 @@
   "name": "kowshik-portfolio",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://kowshikmahi.github.io/EngineeredbyK/",
+  "homepage": "https://kowshikmahi.github.io/Engineeredbyk/",
   "type": "module",
   "scripts": {
     "dev": "vite",
