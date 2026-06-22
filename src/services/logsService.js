@@ -2,70 +2,52 @@ import {
   collection,
   addDoc,
   getDocs,
+  deleteDoc,
+  updateDoc,
+  doc,
   query,
   orderBy,
   serverTimestamp,
-  doc,
-  updateDoc,
-  deleteDoc,
 } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 
-const LOGS_COLLECTION = "logs";
-/* =========================
-   GET ALL LOGS
-========================= */
+const logsRef = collection(db, "learningLogs");
+
+export async function addLog(logData) {
+  const cleanedData = {
+    title: logData.title?.trim() || "",
+    category: logData.category?.trim() || "",
+    date: logData.date || "",
+    summary: logData.summary?.trim() || "",
+    content: logData.content?.trim() || "",
+    createdAt: serverTimestamp(),
+  };
+
+  return await addDoc(logsRef, cleanedData);
+}
+
 export async function fetchLogs() {
-  const logsRef = collection(db, LOGS_COLLECTION);
   const q = query(logsRef, orderBy("createdAt", "desc"));
   const snapshot = await getDocs(q);
 
-  return snapshot.docs.map((item) => ({
-    id: item.id,
-    ...item.data(),
+  return snapshot.docs.map((docItem) => ({
+    id: docItem.id,
+    ...docItem.data(),
   }));
 }
 
-/* =========================
-   CREATE LOG
-========================= */
-export async function addLog(logData) {
-  const logsRef = collection(db, LOGS_COLLECTION);
+export async function deleteLog(id) {
+  await deleteDoc(doc(db, "learningLogs", id));
+}
 
-  const payload = {
-    title: logData.title || "",
-    date: logData.date || "",
-    category: logData.category || "",
-    summary: logData.summary || "",
-    content: logData.content || "",
-    createdAt: serverTimestamp(),
-    updatedAt: serverTimestamp(),
+export async function updateLog(id, updatedData) {
+  const cleanedData = {
+    title: updatedData.title?.trim() || "",
+    category: updatedData.category?.trim() || "",
+    date: updatedData.date || "",
+    summary: updatedData.summary?.trim() || "",
+    content: updatedData.content?.trim() || "",
   };
 
-  const docRef = await addDoc(logsRef, payload);
-  return docRef.id;
-}
-
-/* =========================
-   UPDATE LOG
-========================= */
-export async function updateLog(id, updatedData) {
-  const logRef = doc(db, LOGS_COLLECTION, id);
-
-  await updateDoc(logRef, {
-    title: updatedData.title || "",
-    date: updatedData.date || "",
-    category: updatedData.category || "",
-    summary: updatedData.summary || "",
-    content: updatedData.content || "",
-    updatedAt: serverTimestamp(),
-  });
-}
-
-/* =========================
-   DELETE LOG
-========================= */
-export async function deleteLog(id) {
-  const logRef = doc(db, LOGS_COLLECTION, id);
-  await deleteDoc(logRef);
+  await updateDoc(doc(db, "learningLogs", id), cleanedData);
 }

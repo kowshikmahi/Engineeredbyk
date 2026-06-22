@@ -1,56 +1,55 @@
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaInstagram, FaDownload } from "react-icons/fa";
 import { personalInfo, stats } from "../data/portfolioData";
 
 export default function Hero() {
   return (
-    <section className="hero section" id="home">
+    <section className="hero" id="home">
       <motion.div
         className="hero-left"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        initial={{ opacity: 0, x: -40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7 }}
       >
-        <p className="eyebrow">HELLO, I’M KOWSHIK 👋</p>
+        <p className="eyebrow">MECHATRONICS • WEB DEVELOPMENT • INNOVATION</p>
 
         <h1 className="hero-title">
-          {personalInfo.name}
+          Hi, I’m <span className="gradient-text">{personalInfo.name}</span>
           <br />
-          <span className="gradient-text">{personalInfo.title}</span>
+          {personalInfo.role}
         </h1>
 
-        <p className="hero-subtitle">{personalInfo.subtitle}</p>
+        <p className="hero-subtitle">{personalInfo.bio}</p>
 
         <div className="hero-buttons">
-          <a
-            href={personalInfo.resume}
-            target="_blank"
-            rel="noreferrer"
-            className="primary-btn"
-          >
-            <FaDownload /> Resume
-          </a>
-
-          <a href="#projects" className="secondary-btn">
+          <a href="#projects" className="primary-btn">
             View Projects
+          </a>
+          <a href={personalInfo.resume} target="_blank" rel="noreferrer" className="secondary-btn">
+            Download Resume
           </a>
         </div>
 
         <div className="social-row">
-          <a href={personalInfo.github} target="_blank" rel="noreferrer">
-            <FaGithub />
-          </a>
-          <a href={personalInfo.linkedin} target="_blank" rel="noreferrer">
-            <FaLinkedin />
-          </a>
-          <a href={personalInfo.instagram} target="_blank" rel="noreferrer">
-            <FaInstagram />
-          </a>
+          {personalInfo.socials?.github && (
+            <a href={personalInfo.socials.github} target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+          )}
+          {personalInfo.socials?.linkedin && (
+            <a href={personalInfo.socials.linkedin} target="_blank" rel="noreferrer">
+              LinkedIn
+            </a>
+          )}
+          {personalInfo.socials?.email && (
+            <a href={`mailto:${personalInfo.socials.email}`}>
+              Email
+            </a>
+          )}
         </div>
 
         <div className="stats-grid">
           {stats.map((item, index) => (
-            <div key={index} className="stat-card glass">
+            <div className="stat-card glass" key={index}>
               <h3>{item.value}</h3>
               <p>{item.label}</p>
             </div>
@@ -60,15 +59,16 @@ export default function Hero() {
 
       <motion.div
         className="hero-right"
-        initial={{ opacity: 0, scale: 0.9, rotate: -3 }}
-        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-        transition={{ duration: 1 }}
+        initial={{ opacity: 0, x: 40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7 }}
       >
         <div className="hero-image-wrap">
           <div className="orbit orbit-1"></div>
           <div className="orbit orbit-2"></div>
 
           <div className="hero-card glass">
+            {/* IMPORTANT: image comes from public folder */}
             <img
               src={personalInfo.image}
               alt={personalInfo.name}

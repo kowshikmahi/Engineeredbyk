@@ -167,6 +167,19 @@ button {
   color: white;
 }
 
+.nav-links button {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.nav-links button:hover {
+  color: white;
+}
+
 .resume-nav-btn {
   padding: 10px 18px;
   border-radius: 14px;
