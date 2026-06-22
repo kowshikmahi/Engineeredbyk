@@ -11,8 +11,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 
-const LOGS_COLLECTION = "learningLogs";
-
+const LOGS_COLLECTION = "logs";
 /* =========================
    GET ALL LOGS
 ========================= */
