@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { personalInfo } from "../data/portfolioData";
 
 export default function Navbar() {
   return (
@@ -7,26 +6,28 @@ export default function Navbar() {
       className="navbar"
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.6 }}
     >
-      <div className="nav-brand">
+      <a href="#home" className="nav-brand">
         <span className="brand-k">K</span>
-        <span className="brand-text">owshik.dev</span>
-      </div>
+        <span className="brand-text">Kowshik Mahi</span>
+      </a>
 
       <div className="nav-links">
+        <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
+        <a href="#learning-logs">Learning Logs</a>
         <a href="#contact">Contact</a>
       </div>
 
       <a
-        className="resume-nav-btn"
-        href={personalInfo.resume}
+        href="/resume.pdf"
         target="_blank"
         rel="noreferrer"
+        className="resume-nav-btn"
       >
         Resume
       </a>

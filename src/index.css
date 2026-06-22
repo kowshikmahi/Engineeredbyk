@@ -68,7 +68,7 @@ button {
 .noise {
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 18px 18px;
   pointer-events: none;
   opacity: 0.35;
@@ -126,7 +126,7 @@ button {
   align-items: center;
   justify-content: space-between;
   background: rgba(10, 12, 22, 0.65);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(16px);
   border-radius: 20px;
   box-shadow: var(--shadow);
@@ -238,9 +238,9 @@ button {
 }
 
 .secondary-btn {
-  border: 1px solid rgba(255,255,255,0.14);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   color: white;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .delete-btn {
@@ -274,15 +274,15 @@ button {
   border-radius: 14px;
   display: grid;
   place-items: center;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 1.2rem;
   transition: 0.3s ease;
 }
 
 .social-row a:hover {
   transform: translateY(-5px) scale(1.05);
-  background: linear-gradient(135deg, rgba(94,162,255,0.3), rgba(157,124,255,0.3));
+  background: linear-gradient(135deg, rgba(94, 162, 255, 0.3), rgba(157, 124, 255, 0.3));
 }
 
 .stats-grid {
@@ -340,7 +340,7 @@ button {
 
 .orbit {
   position: absolute;
-  border: 1px dashed rgba(255,255,255,0.12);
+  border: 1px dashed rgba(255, 255, 255, 0.12);
   border-radius: 50%;
   animation: spin 14s linear infinite;
 }
@@ -364,8 +364,13 @@ button {
 }
 
 @keyframes floatCard {
-  0%,100% { transform: translateY(0px) rotateY(0deg); }
-  50% { transform: translateY(-10px) rotateY(3deg); }
+  0%,
+  100% {
+    transform: translateY(0px) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotateY(3deg);
+  }
 }
 
 /* ABOUT */
@@ -454,7 +459,7 @@ button {
   display: inline-block;
   padding: 8px 14px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   color: var(--cyan);
   font-size: 0.85rem;
   margin-bottom: 16px;
@@ -481,8 +486,8 @@ button {
   padding: 8px 12px;
   border-radius: 999px;
   font-size: 0.85rem;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* TIMELINE */
@@ -505,11 +510,14 @@ button {
   position: absolute;
   left: 24px;
   top: 32px;
-  box-shadow: 0 0 24px rgba(93,247,255,0.5);
+  box-shadow: 0 0 24px rgba(93, 247, 255, 0.5);
+  flex-shrink: 0;
 }
 
 .timeline-item h3 {
   font-size: 1.2rem;
+  line-height: 1.4;
+  margin: 0;
 }
 
 .timeline-item span {
@@ -517,11 +525,13 @@ button {
   margin: 8px 0 12px;
   color: var(--cyan);
   font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .timeline-item p {
   color: var(--muted);
   line-height: 1.8;
+  margin: 0;
 }
 
 /* LEARNING LOGS */
@@ -640,8 +650,8 @@ button {
 .contact-icon {
   border-radius: 22px;
   padding: 20px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -655,7 +665,7 @@ button {
 
 .contact-icon:hover {
   transform: translateY(-6px);
-  background: linear-gradient(135deg, rgba(94,162,255,0.22), rgba(157,124,255,0.22));
+  background: linear-gradient(135deg, rgba(94, 162, 255, 0.22), rgba(157, 124, 255, 0.22));
 }
 
 /* FOOTER */
@@ -703,8 +713,8 @@ button {
 .admin-form input,
 .admin-form textarea {
   width: 100%;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
   color: white;
   padding: 14px 16px;
   border-radius: 14px;
@@ -924,7 +934,23 @@ button {
   }
 
   .timeline-item {
-    padding-left: 54px;
+    padding: 22px 22px 22px 52px;
+  }
+
+  .timeline-dot {
+    width: 14px;
+    height: 14px;
+    left: 20px;
+    top: 26px;
+  }
+
+  .timeline-item h3 {
+    font-size: 1.1rem;
+  }
+
+  .timeline-item span {
+    font-size: 0.92rem;
+    margin: 6px 0 10px;
   }
 
   .contact-right {
@@ -1010,8 +1036,35 @@ button {
     border-radius: 20px;
   }
 
+  /* FIXED TIMELINE FOR MOBILE */
+  .timeline-item {
+    padding: 18px 16px 18px 44px;
+  }
+
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    left: 16px;
+    top: 22px;
+  }
+
+  .timeline-item h3 {
+    font-size: 1.05rem;
+    line-height: 1.45;
+  }
+
+  .timeline-item span {
+    font-size: 0.88rem;
+    margin: 6px 0 10px;
+    line-height: 1.4;
+  }
+
+  .timeline-item p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+
   .project-card h3,
-  .timeline-item h3,
   .log-card h3 {
     font-size: 1.1rem;
   }
