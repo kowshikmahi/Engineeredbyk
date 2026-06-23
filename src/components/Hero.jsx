@@ -1,7 +1,31 @@
 import { motion } from "framer-motion";
+import { useLocation, useNavigate } from "react-router-dom";
 import { personalInfo, stats } from "../data/portfolioData";
 
 export default function Hero() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleProjectsClick = () => {
+    // If already on home page, scroll directly
+    if (location.pathname === "/") {
+      const section = document.getElementById("projects");
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // If on another page like /admin, go to home first
+      navigate("/");
+
+      setTimeout(() => {
+        const section = document.getElementById("projects");
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 200);
+    }
+  };
+
   return (
     <section className="hero" id="home">
       <motion.div
@@ -21,29 +45,47 @@ export default function Hero() {
         <p className="hero-subtitle">{personalInfo.bio}</p>
 
         <div className="hero-buttons">
-          <a href="#projects" className="primary-btn">
+          <button
+            type="button"
+            className="primary-btn"
+            onClick={handleProjectsClick}
+          >
             View Projects
-          </a>
-          <a href={personalInfo.resume} target="_blank" rel="noreferrer" className="secondary-btn">
+          </button>
+
+          <a
+            href={personalInfo.resume}
+            target="_blank"
+            rel="noreferrer"
+            className="secondary-btn"
+          >
             Download Resume
           </a>
         </div>
 
         <div className="social-row">
           {personalInfo.socials?.github && (
-            <a href={personalInfo.socials.github} target="_blank" rel="noreferrer">
+            <a
+              href={personalInfo.socials.github}
+              target="_blank"
+              rel="noreferrer"
+            >
               GitHub
             </a>
           )}
+
           {personalInfo.socials?.linkedin && (
-            <a href={personalInfo.socials.linkedin} target="_blank" rel="noreferrer">
+            <a
+              href={personalInfo.socials.linkedin}
+              target="_blank"
+              rel="noreferrer"
+            >
               LinkedIn
             </a>
           )}
+
           {personalInfo.socials?.email && (
-            <a href={`mailto:${personalInfo.socials.email}`}>
-              Email
-            </a>
+            <a href={`mailto:${personalInfo.socials.email}`}>Email</a>
           )}
         </div>
 
@@ -68,7 +110,6 @@ export default function Hero() {
           <div className="orbit orbit-2"></div>
 
           <div className="hero-card glass">
-            {/* IMPORTANT: image comes from public folder */}
             <img
               src={personalInfo.image}
               alt={personalInfo.name}

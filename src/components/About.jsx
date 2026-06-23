@@ -21,7 +21,7 @@ export default function About() {
       >
         <p>
           I’m <span className="highlight">Kowshik Mahendran</span>, a BE
-          Mechatronics student with a strong interest in web development,
+          Mechatronics graduate with a strong interest in web development,
           automation, embedded ideas, and building products that feel both smart
           and useful. I enjoy blending engineering logic with creative UI design.
         </p>
