@@ -13,6 +13,11 @@
   --red: #ff4d67;
   --yellow: #ffd84f;
   --shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+
+  /* navbar sizing */
+  --nav-top-gap: 18px;
+  --nav-height: 78px;
+  --nav-total-space: calc(var(--nav-height) + var(--nav-top-gap) + 14px);
 }
 
 * {
@@ -60,10 +65,11 @@ button {
   cursor: pointer;
 }
 
+/* Prevent fixed navbar from overlapping page */
 .app-shell {
   position: relative;
   overflow: hidden;
-  padding-top: 110px;
+  padding-top: var(--nav-total-space);
 }
 
 .noise {
@@ -82,6 +88,7 @@ button {
   padding: 90px 0;
   position: relative;
   z-index: 2;
+  scroll-margin-top: calc(var(--nav-total-space) + 12px);
 }
 
 .glass {
@@ -111,6 +118,7 @@ button {
 
 .gradient-text {
   background: linear-gradient(90deg, var(--cyan), var(--violet), var(--blue));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -125,12 +133,11 @@ button {
 ========================= */
 .navbar {
   position: fixed;
-  top: 18px;
-  left: 0;
-  right: 0;
+  top: var(--nav-top-gap);
+  left: 50%;
   width: min(1200px, 92%);
-  margin: 0 auto;
-  padding: 16px 22px;
+  min-height: var(--nav-height);
+  padding: 14px 22px;
   z-index: 1000;
 
   display: flex;
@@ -149,7 +156,7 @@ button {
 .nav-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-weight: 700;
   font-size: 1.05rem;
   color: #fff;
@@ -157,17 +164,13 @@ button {
   flex-shrink: 0;
 }
 
-.brand-k {
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--violet), var(--blue));
-  color: white;
-  font-weight: 800;
+.nav-logo {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  display: block;
   flex-shrink: 0;
-  box-shadow: 0 10px 24px rgba(94, 162, 255, 0.2);
+  filter: drop-shadow(0 8px 22px rgba(94, 162, 255, 0.22));
 }
 
 .brand-text {
@@ -184,10 +187,6 @@ button {
   color: var(--muted);
   flex-wrap: wrap;
   margin-left: auto;
-}
-
-.nav-links a:hover {
-  color: white;
 }
 
 .nav-links button {
@@ -328,118 +327,12 @@ button {
 }
 
 /* =========================
-   RESPONSIVE NAVBAR
-========================= */
-@media (max-width: 1050px) {
-  .navbar {
-    width: min(1200px, 92%);
-    min-height: 76px;
-    padding: 12px 14px;
-    border-radius: 22px;
-  }
-
-  .nav-links,
-  .resume-nav-btn {
-    display: none;
-  }
-
-  .mobile-menu-btn {
-    display: flex;
-  }
-
-  .nav-brand {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .brand-text {
-    font-size: 1rem;
-  }
-
-  .brand-k {
-    width: 36px;
-    height: 36px;
-    border-radius: 12px;
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar {
-    width: 94%;
-    min-height: 74px;
-    padding: 12px 14px;
-    border-radius: 20px;
-  }
-
-  .brand-text {
-    font-size: 0.96rem;
-  }
-
-  .mobile-menu-btn {
-    width: 48px;
-    height: 48px;
-    border-radius: 15px;
-  }
-
-  .mobile-menu-btn span {
-    width: 19px;
-  }
-}
-
-@media (max-width: 560px) {
-  .navbar {
-    width: 94%;
-    min-height: 72px;
-    padding: 10px 12px;
-    border-radius: 18px;
-    gap: 10px;
-  }
-
-  .nav-brand {
-    gap: 10px;
-  }
-
-  .brand-k {
-    width: 34px;
-    height: 34px;
-    font-size: 0.95rem;
-    border-radius: 11px;
-  }
-
-  .brand-text {
-    font-size: 0.92rem;
-  }
-
-  .mobile-menu-btn {
-    width: 46px;
-    height: 46px;
-    border-radius: 14px;
-  }
-
-  .mobile-menu-btn span {
-    width: 18px;
-  }
-
-  .mobile-dropdown {
-    padding: 12px;
-    border-radius: 18px;
-  }
-
-  .mobile-dropdown button,
-  .mobile-admin-btn {
-    padding: 13px 14px;
-    font-size: 0.95rem;
-  }
-}
-
-/* =========================
    HERO
 ========================= */
 .hero {
   width: min(1200px, 92%);
   margin: 0 auto;
-  min-height: 100vh;
+  min-height: calc(100vh - var(--nav-total-space));
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 42px;
@@ -623,8 +516,7 @@ button {
 }
 
 @keyframes floatCard {
-  0%,
-  100% {
+  0%, 100% {
     transform: translateY(0px) rotateY(0deg);
   }
   50% {
@@ -1098,6 +990,11 @@ button {
    RESPONSIVE
 ========================= */
 @media (max-width: 1050px) {
+  :root {
+    --nav-height: 76px;
+    --nav-total-space: calc(var(--nav-height) + var(--nav-top-gap) + 14px);
+  }
+
   .navbar {
     width: min(1200px, 92%);
     min-height: 76px;
@@ -1112,6 +1009,20 @@ button {
 
   .mobile-menu-btn {
     display: flex;
+  }
+
+  .nav-brand {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .brand-text {
+    font-size: 1rem;
+  }
+
+  .nav-logo {
+    width: 40px;
+    height: 40px;
   }
 
   .hero {
@@ -1150,18 +1061,40 @@ button {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --nav-top-gap: 14px;
+    --nav-height: 74px;
+    --nav-total-space: calc(var(--nav-height) + var(--nav-top-gap) + 12px);
+  }
+
   .section {
     padding: 70px 0;
   }
 
   .navbar {
     width: 94%;
+    min-height: 74px;
     padding: 12px 14px;
-    border-radius: 18px;
+    border-radius: 20px;
   }
 
   .brand-text {
-    font-size: 0.95rem;
+    font-size: 0.96rem;
+  }
+
+  .nav-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .mobile-menu-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 15px;
+  }
+
+  .mobile-menu-btn span {
+    width: 19px;
   }
 
   .hero-title {
@@ -1248,27 +1181,32 @@ button {
 }
 
 @media (max-width: 560px) {
+  :root {
+    --nav-top-gap: 12px;
+    --nav-height: 72px;
+    --nav-total-space: calc(var(--nav-height) + var(--nav-top-gap) + 10px);
+  }
+
   .section {
     width: 92%;
     padding: 60px 0;
   }
 
   .navbar {
-    margin-top: 14px;
     width: 94%;
     min-height: 72px;
     padding: 10px 12px;
-    border-radius: 20px;
+    border-radius: 18px;
+    gap: 10px;
   }
 
   .nav-brand {
     gap: 10px;
   }
 
-  .brand-k {
+  .nav-logo {
     width: 34px;
     height: 34px;
-    font-size: 0.95rem;
   }
 
   .brand-text {
@@ -1278,7 +1216,7 @@ button {
   .mobile-menu-btn {
     width: 46px;
     height: 46px;
-    border-radius: 15px;
+    border-radius: 14px;
   }
 
   .mobile-menu-btn span {

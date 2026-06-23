@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import logo from "../assets/logo.svg";
 
 const navItems = [
   { id: "about", label: "About" },
@@ -40,7 +41,6 @@ export default function Navbar() {
     }
   };
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (navRef.current && !navRef.current.contains(e.target)) {
@@ -52,13 +52,11 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Detect active section on scroll
   useEffect(() => {
     if (location.pathname !== "/") return;
 
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 140;
-
       let current = "about";
 
       for (const item of navItems) {
@@ -85,28 +83,26 @@ export default function Navbar() {
     <motion.nav
       ref={navRef}
       className="navbar"
-      initial={{ y: -40, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      initial={{ y: -40, opacity: 0, x: "-50%" }}
+      animate={{ y: 0, opacity: 1, x: "-50%" }}
       transition={{ duration: 0.5 }}
     >
-      {/* Brand */}
       <Link
-  to="/"
-  className="nav-brand"
-  onClick={(e) => {
-    setMenuOpen(false);
+        to="/"
+        className="nav-brand"
+        onClick={(e) => {
+          setMenuOpen(false);
 
-    if (location.pathname === "/") {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  }}
->
-  <span className="brand-k">K</span>
-  <span className="brand-text">Kowshik Mahi</span>
-</Link>
+          if (location.pathname === "/") {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        }}
+      >
+        <img src={logo} alt="Kowshik Mahi Logo" className="nav-logo" />
+        <span className="brand-text">Kowshik Mahi</span>
+      </Link>
 
-      {/* Desktop nav */}
       <div className="nav-links">
         {navItems.map((item) => (
           <button
@@ -119,12 +115,10 @@ export default function Navbar() {
         ))}
       </div>
 
-      {/* Desktop admin */}
       <Link to="/admin" className="resume-nav-btn">
         Admin
       </Link>
 
-      {/* Mobile menu button */}
       <button
         className={`mobile-menu-btn ${menuOpen ? "open" : ""}`}
         onClick={() => setMenuOpen((prev) => !prev)}
@@ -135,7 +129,6 @@ export default function Navbar() {
         <span></span>
       </button>
 
-      {/* Mobile dropdown */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
