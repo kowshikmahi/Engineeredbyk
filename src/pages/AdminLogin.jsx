@@ -16,41 +16,57 @@ export default function AdminLogin() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setForm((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  const handleLogin = async (e) => {
+  async function handleLogin(e) {
     e.preventDefault();
+
     setLoading(true);
     setErrorMsg("");
 
     try {
-      await signInWithEmailAndPassword(auth, form.email, form.password);
+      await signInWithEmailAndPassword(
+        auth,
+        form.email,
+        form.password
+      );
+
       navigate("/admin");
-    } catch (error) {
-      console.error("Login error:", error);
+    } catch (err) {
+      console.error(err);
+
       setErrorMsg("Invalid email or password.");
-    } finally {
-      setLoading(false);
     }
-  };
+
+    setLoading(false);
+  }
 
   return (
     <div className="admin-page">
+
       <div className="admin-auth-card glass">
-        <h2>Admin Login</h2>
+
+        <h1>Portfolio CMS</h1>
+
         <p className="admin-subtitle">
-          Sign in to manage your learning logs.
+          Sign in to manage your client works,
+          learning logs and portfolio content.
         </p>
 
-        <form className="admin-form" onSubmit={handleLogin}>
+        <form
+          className="admin-form"
+          onSubmit={handleLogin}
+        >
+
           <input
             type="email"
             name="email"
-            placeholder="Admin email"
+            placeholder="Admin Email"
             value={form.email}
             onChange={handleChange}
             required
@@ -65,17 +81,32 @@ export default function AdminLogin() {
             required
           />
 
-          <button type="submit" className="primary-btn admin-btn" disabled={loading}>
-            {loading ? "Signing in..." : "Login"}
+          <button
+            className="primary-btn admin-btn"
+            disabled={loading}
+          >
+            {loading
+              ? "Signing In..."
+              : "Login"}
           </button>
 
-          {errorMsg && <p className="error-text">{errorMsg}</p>}
         </form>
 
-        <Link to="/" className="back-home-link">
+        {errorMsg && (
+          <p className="error-text">
+            {errorMsg}
+          </p>
+        )}
+
+        <Link
+          to="/"
+          className="back-home-link"
+        >
           ← Back to Portfolio
         </Link>
+
       </div>
+
     </div>
   );
 }

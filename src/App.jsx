@@ -8,6 +8,7 @@ import LearningLogs from "./components/LearningLogs";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import "./index.css";
+import ProjectDetails from "./pages/ProjectDetails";
 
 export default function App() {
   return (
